@@ -21,7 +21,6 @@ module.exports = {
       'error',
       {
         'endOfLine': 'auto',
-        'singleQuote': 'true',
       },
     ],
     '@typescript-eslint/interface-name-prefix': 'off',
