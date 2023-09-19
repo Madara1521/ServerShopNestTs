@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class AddToCartDto {
-  @ApiProperty({ example: 'Stasik' })
+  @ApiProperty({ example: 'Ivan' })
   @IsNotEmpty()
   readonly username: string;
 

@@ -65,7 +65,7 @@ export class ShoppingCartService {
     return { total_price: product.total_price };
   }
 
-  async remove(productId: number): Promise<void> {
+  async remove(productId: number | string): Promise<void> {
     const product = await this.shoppingCartModel.findOne({
       where: { productId },
     });
@@ -73,7 +73,7 @@ export class ShoppingCartService {
     await product.destroy();
   }
 
-  async removeAll(userId: number): Promise<void> {
+  async removeAll(userId: number | string): Promise<void> {
     await this.shoppingCartModel.destroy({ where: { userId } });
   }
 }
