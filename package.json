@@ -37,6 +37,7 @@
     "class-validator": "^0.14.0",
     "express-session": "^1.17.3",
     "liqpay": "^0.0.1",
+    "liqpay-sdk-nodejs": "^1.0.3",
     "mysql2": "^3.6.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
