@@ -36,7 +36,7 @@ export class ShoesController {
   @UseGuards(AuthenticatedGuard)
   @Get('find/:id')
   getOne(@Param('id') id: string) {
-    return this.shoesService.findOne(+id);
+    return this.shoesService.findOne(id);
   }
 
   @ApiOkResponse({ type: GetBestsellersResponse })

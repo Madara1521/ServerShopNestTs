@@ -23,13 +23,11 @@ export class PaymentService {
 
       // Формируем json_string
       const data = base64.encode(JSON.stringify(json_string));
-      console.log(`Data:${data}`);
 
       const sha1 = createHash('sha1');
       // Кодируем sign_string функцией sha1 и base64_encode
       sha1.update(private_key + data + private_key);
       const signature = sha1.digest('base64');
-      console.log(`Signature:${signature}`);
 
       // Формируем POST-запрос к LiqPay API
       const response = await axios.post(
