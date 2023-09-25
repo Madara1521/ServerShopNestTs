@@ -40,7 +40,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
       popularity: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       compatibility: {
         type: Sequelize.STRING,

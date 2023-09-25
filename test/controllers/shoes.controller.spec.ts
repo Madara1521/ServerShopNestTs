@@ -88,7 +88,142 @@ describe('Shoes Controller', () => {
         in_stock: expect.any(Number),
         bestseller: expect.any(Boolean),
         new: expect.any(Boolean),
-        popularity: expect.any(String), //Number
+        popularity: expect.any(Number),
+        compatibility: expect.any(String),
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      }),
+    );
+  });
+
+  it('should get bestsellers', async () => {
+    const login = await request(app.getHttpServer())
+      .post('/users/login')
+      .send({ username: mockedUser.username, password: mockedUser.password });
+
+    const response = await request(app.getHttpServer())
+      .get('/shoes/bestsellers')
+      .set('Cookie', login.headers['set-cookie']);
+
+    expect(response.body.rows).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(Number),
+          shoes_manufacturer: expect.any(String),
+          price: expect.any(Number),
+          country_maufacturer: expect.any(String),
+          vendor_code: expect.any(String),
+          name: expect.any(String),
+          description: expect.any(String),
+          images: expect.any(String),
+          in_stock: expect.any(Number),
+          bestseller: true,
+          new: expect.any(Boolean),
+          popularity: expect.any(Number),
+          compatibility: expect.any(String),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+        },
+      ]),
+    );
+  });
+
+  it('should get new shoes', async () => {
+    const login = await request(app.getHttpServer())
+      .post('/users/login')
+      .send({ username: mockedUser.username, password: mockedUser.password });
+
+    const response = await request(app.getHttpServer())
+      .get('/shoes/new')
+      .set('Cookie', login.headers['set-cookie']);
+
+    expect(response.body.rows).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(Number),
+          shoes_manufacturer: expect.any(String),
+          price: expect.any(Number),
+          country_maufacturer: expect.any(String),
+          vendor_code: expect.any(String),
+          name: expect.any(String),
+          description: expect.any(String),
+          images: expect.any(String),
+          in_stock: expect.any(Number),
+          bestseller: expect.any(Boolean),
+          new: true,
+          popularity: expect.any(Number),
+          compatibility: expect.any(String),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+        },
+      ]),
+    );
+  });
+
+  it('should search by string', async () => {
+    const body = { search: 'nos' };
+    const login = await request(app.getHttpServer())
+      .post('/users/login')
+      .send({ username: mockedUser.username, password: mockedUser.password });
+
+    const response = await request(app.getHttpServer())
+      .post('/shoes/search')
+      .send(body)
+      .set('Cookie', login.headers['set-cookie']);
+
+    expect(response.body.rows.length).toBeLessThanOrEqual(20);
+
+    response.body.rows.forEach((element) => {
+      expect(element.name.toLowerCase()).toContain(body.search);
+    });
+    expect(response.body.rows).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(Number),
+          shoes_manufacturer: expect.any(String),
+          price: expect.any(Number),
+          country_maufacturer: expect.any(String),
+          vendor_code: expect.any(String),
+          name: expect.any(String),
+          description: expect.any(String),
+          images: expect.any(String),
+          in_stock: expect.any(Number),
+          bestseller: expect.any(Boolean),
+          new: expect.any(Boolean),
+          popularity: expect.any(Number),
+          compatibility: expect.any(String),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+        },
+      ]),
+    );
+  });
+
+  it('should get by name', async () => {
+    const body = { name: 'Illum reprehenderit.' };
+    const login = await request(app.getHttpServer())
+      .post('/users/login')
+      .send({ username: mockedUser.username, password: mockedUser.password });
+
+    const response = await request(app.getHttpServer())
+      .post('/shoes/name')
+      .send(body)
+      .set('Cookie', login.headers['set-cookie']);
+
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        id: expect.any(Number),
+        shoes_manufacturer: expect.any(String),
+        price: expect.any(Number),
+        country_maufacturer: expect.any(String),
+        vendor_code: expect.any(String),
+        name: 'Illum reprehenderit.',
+        description: expect.any(String),
+        images: expect.any(String),
+        in_stock: expect.any(Number),
+        bestseller: expect.any(Boolean),
+        new: expect.any(Boolean),
+        popularity: expect.any(Number),
         compatibility: expect.any(String),
         createdAt: expect.any(String),
         updatedAt: expect.any(String),

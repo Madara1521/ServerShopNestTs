@@ -8,7 +8,7 @@ export class AddToCartDto {
 
   @ApiProperty({ example: 1 })
   @IsOptional()
-  userId: number;
+  userId?: number;
 
   @ApiProperty({ example: 1 })
   @IsNotEmpty()
