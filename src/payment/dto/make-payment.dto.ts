@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
 export class MakePaymentDto {
-  @ApiProperty({ example: 100 })
+  @ApiProperty({ example: 10000 })
   @IsNotEmpty()
   readonly amount: number;
 }
